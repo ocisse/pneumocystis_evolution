@@ -30,7 +30,8 @@ Project Organization
     ├── src                <- Source code for use in this project.
     │   ├── data           <- Scripts to download or generate data (snakemake files)
         |                  <- Pwk.sm (Pneumocystis wakefieldiae genome assembly notes)
-    │   │   └── envs
+    |   |                  <- Pcan.sh (Pneumocystis canis genome assembly notes)
+    │   |── envs
     │   │
     │   └── visualization  <- Scripts to create exploratory and results oriented visualizations (R )
 

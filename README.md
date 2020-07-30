@@ -28,9 +28,10 @@ Project Organization
     │                         generated with `pip freeze > requirements.txt`
     │
     ├── src                <- Source code for use in this project.
-    │   ├── data           <- Scripts to download or generate data (snakemake files)
-        |                  <- Pwk.sm (Pneumocystis wakefieldiae genome assembly notes)
+    │   ├── data           <- Scripts to download or generate data 
+        |                  <- Pwk.sm (Pneumocystis wakefieldiae genome assembly notes - snakemake format)
     |   |                  <- Pcan.sh (Pneumocystis canis genome assembly notes)
+    |   |                  <- Pmac.sh (Pneumocystis macacae genome assembly notes)
     │   |── envs
     │   │
     │   └── visualization  <- Scripts to create exploratory and results oriented visualizations (R )

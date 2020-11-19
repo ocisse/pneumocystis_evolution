@@ -1,0 +1,42 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r}
+library(plotrix); library(viridis)
+
+# load CSV of times
+divTimes<-read.csv("Mammals-v-Pneumocystis_toPlot3.csv")
+
+#colBars<-c( plasma(10)[1], plasma(10)[3], plasma(10)[5], plasma(10)[7])
+colBars<-c( plasma(10)[1], plasma(10)[1], 
+            plasma(10)[3], plasma(10)[3],
+            plasma(10)[5], plasma(10)[5],
+            "darkorange3","darkorange3",
+            "darkorange3", "darkorange3",
+            "darkorange", "darkorange", "darkorange")
+#colBars <- c("black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black")
+
+#pdf(file="compare_mamPhy_cladeDivTimes_plot95CI_oc.pdf",height=7,width=16,onefile=TRUE)
+svg(file="compare_mamPhy_cladeDivTimes_plot95CI_oc.svg", ,height=5,width=12,onefile=TRUE)
+	plotCI(y=rev(1:length(divTimes$height_median)), x= -divTimes$height_median, ui= -divTimes$height_95._HPD_MIN, li= -divTimes$height_95._HPD_MAX, err="x",
+	       sfrac=0, add=FALSE, col=colBars,
+	       #pt.bg="white",
+	       pt.bg=as.character(divTimes$colNode),
+	       #pch=22,
+	       pch=as.numeric(divTimes$pch),
+	       xaxt="n", yaxt="n",bty="n", ylab="",xlab="", xpd=NA, xlim=c(-200,50), lwd=2, cex=1.5)
+	axis(side=1, at=-seq(0,200,by=20), labels=seq(0,200,by=20))
+
+		text(labels=(divTimes$taxon), x= -divTimes$height_median, y=rev(1:length(divTimes$height_median))+0.4, xpd=NA, adj=0, cex=1, col=colBars) #
+		lines(x=c(-66,-66), y=c(-2,55), lwd=1, col=grey(0.4,alpha=1), lty=2)	
+
+	#plotCI(y=rev(1:length(divTimes$height_median)), x= -divTimes$height_median, ui= -divTimes$height_95._HPD_MIN, li= -divTimes$height_95._HPD_MAX, err="x",
+	#       sfrac=0, add=TRUE, scol=colBars, pch=20, yaxt="n",bty="n", ylab="",xlab="", xpd=NA, xlim=c(-130,0), lwd=2.3, cex=1.4)
+
+dev.off()
+
+```
+

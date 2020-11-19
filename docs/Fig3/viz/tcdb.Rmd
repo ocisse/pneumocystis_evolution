@@ -1,0 +1,18 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+. 
+
+```{r}
+tcdb <- read.csv("../../data/processed/tcdb/all_species_tcdb.csv", header = T)
+t.test(tcdb$pj,tcdb$pmac, alternative = "two.sided")
+t.test(tcdb$pj,tcdb$pcanCk1, alternative = "two.sided")
+wilcox.test(tcdb$pj,tcdb$pmac,exact = TRUE)
+wilcox.test(tcdb$pj,tcdb$pcanCk1,exact = TRUE)
+
+```
+
+
+

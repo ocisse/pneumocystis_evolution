@@ -1,0 +1,94 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+```{r}
+# heatmap
+library(ggplot2); library(rcompanion); library(gridExtra)
+
+if (!require("gplots")) {
+   install.packages("gplots", dependencies = TRUE)
+   library(gplots)
+   }
+if (!require("RColorBrewer")) {
+   install.packages("RColorBrewer", dependencies = TRUE)
+   library(RColorBrewer)
+}
+```
+
+```{r}
+# load pfam
+pf <- read.csv("../../data/processed/pfam/31.0/selected_v2.csv", header = T)
+pf$composite_id <- paste(pf$Domain,pf$Ann, sep = ":", collapse = NULL)
+pfrnames <- pf[,10]
+matpf <- data.matrix(pf[,2:8])
+rownames(matpf) <- pfrnames
+my_palette_pf <- colorRampPalette(c("darkgreen","green","yellow","orange","orange1", "red"))(n = 299)
+
+
+# load ECs
+ecs <- read.csv("../../data/processed/pfriam/selected_v2.csv", header = T)
+ecs$composite_id <- paste(ecs$EC,ecs$ANN_Abr, sep = ":", collapse = NULL)
+ecrnames <- ecs[,13]
+matec <- data.matrix(ecs[,2:8])
+rownames(matec) <- ecrnames
+my_palette_ec <- c("#C0C0C0","black")
+
+```
+# heatmap
+```{r}
+# heatmap
+
+png("../../data/processed/pfam/31.0/selected.heatmap.png",    # create PNG for the heat map        
+width = 10*300,        # 5 x 300 pixels
+height = 5*300,
+res = 300,            # 300 pixels per inch
+pointsize = 7) 
+
+heatmap.2(matpf,
+#  cellnote = matpf,  # same data set for cell labels
+  #main = "Pairwise Nucleotide Identity (%)", # heat map title
+  notecol="black",      # change font color of cell labels to black
+  density.info="none",  # turns off density plot inside color legend
+  trace="none",         # turns off trace lines inside the heat map
+  #margins =c(12,9),     # widens margins around plot
+  col=my_palette_pf,       # use on color palette defined earlier
+  dendrogram="row",     # only draw a row dendrogram
+  Colv="NA",# turn off column clustering
+  na.rm=TRUE
+  )
+dev.off()
+
+# to fix the order in this one
+order <- c("PjirRu7","Pmk","Prab","pdgck","Pcar","Pmur","Pwk")
+
+png("../../data/processed/pfriam/selected.heatmap.png",    # create PNG for the heat map        
+width =10*300,        # 5 x 300 pixels
+height = 5*300,
+res = 300,            # 300 pixels per inch
+pointsize = 7) 
+heatmap.2(as.matrix(matec[,order]),
+  #cellnote = matec,  # same data set for cell labels
+  #main = "Pairwise Nucleotide Identity (%)", # heat map title
+  notecol="black",      # change font color of cell labels to black
+  density.info="none",  # turns off density plot inside color legend
+  trace="none",         # turns off trace lines inside the heat map
+  margins =c(12,9),     # widens margins around plot
+  col=my_palette_ec,       # use on color palette defined earlier
+  dendrogram="row",     # only draw a row dendrogram
+  Colv="NA"             # turn off column clustering
+  )
+dev.off()
+
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file). 
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+

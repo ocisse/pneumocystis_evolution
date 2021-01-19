@@ -36,6 +36,14 @@ Project Organization
     │   │
     │   └── visualization  <- Scripts to create exploratory and results oriented visualizations (R )
 
+------------
+Pipelines:
+    src/data/intra_inter_div.smk:   whole genome pairwise divergence computation (snakemake)
+    src/data/Pmac.sh:   Pneumocystis macacae wgs assembly (bash)
+    src/data/Pwk.smk:   Pneumocystis wakefieldiae assembly (snakemake)
+    src/data/Pcan.sh:   Pneumocystis canis assembly (bash)
+
+    
 
 --------
 

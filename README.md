@@ -36,6 +36,8 @@ Project Organization
     │   │
     │   └── visualization  <- Scripts to create exploratory and results oriented visualizations (R )
 
+Data description (selected):
+
 ```
 Pipelines:
     src/data/intra_inter_div.smk:   whole genome pairwise divergence computation (snakemake)

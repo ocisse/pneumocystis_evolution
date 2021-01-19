@@ -3,6 +3,8 @@ Pneumocystis evolution
 
 Genomic analysis of host specific fungal pathogen Pneumocystis to mammals
 
+[![DOI](https://zenodo.org/badge/263383521.svg)](https://zenodo.org/badge/latestdoi/263383521)
+
 Project Organization
 ------------
 
